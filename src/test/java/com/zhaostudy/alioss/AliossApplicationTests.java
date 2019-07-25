@@ -2,6 +2,8 @@ package com.zhaostudy.alioss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.Bucket;
+import com.aliyun.oss.model.OSSObjectSummary;
+import com.aliyun.oss.model.ObjectListing;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,16 @@ public class AliossApplicationTests {
     public void putObject() throws FileNotFoundException {
         InputStream inputStream = new FileInputStream("D:/Test/测试上传文件.txt");
         oss.putObject(bucket, "测试上传文件.txt", inputStream);
+    }
+    /**
+     * 简单列举文件
+     */
+    @Test
+    public void listObjects() {
+        ObjectListing objectListing = oss.listObjects(bucket);
+        List<OSSObjectSummary> sums = objectListing.getObjectSummaries();
+        for (OSSObjectSummary s : sums) {
+            System.out.println("\t" + s.getKey());
+        }
     }
 }
