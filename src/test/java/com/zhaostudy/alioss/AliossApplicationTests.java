@@ -1,12 +1,15 @@
 package com.zhaostudy.alioss;
 
 import com.aliyun.oss.OSS;
+import com.aliyun.oss.model.Bucket;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,6 +30,15 @@ public class AliossApplicationTests {
         // 新建存储空间默认为标准存储类型，私有权限。
         oss.createBucket(bucketName);
     }
-
-
+    /**
+     * 列举存储空间
+     */
+    @Test
+    public void listBuckets() {
+        // 列举存储空间。
+        List<Bucket> buckets = oss.listBuckets();
+        for (Bucket bucket : buckets) {
+            System.out.println(" - " + bucket.getName());
+        }
+    }
 }
