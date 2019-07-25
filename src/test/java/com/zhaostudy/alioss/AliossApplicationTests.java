@@ -2,6 +2,7 @@ package com.zhaostudy.alioss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.Bucket;
+import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -74,5 +76,12 @@ public class AliossApplicationTests {
         // 删除文件。
         oss.deleteObject(bucket, "测试上传文件.txt");
     }
-
+    /**
+     * 下载指定文件
+     */
+    @Test
+    public void getObject() {
+        // 下载OSS文件到本地文件。如果指定的本地文件存在会覆盖，不存在则新建。
+        oss.getObject(new GetObjectRequest(bucket, "测试上传文件.txt"), new File("D:/Test/下载回来的测试上传文件.txt"));
+    }
 }
