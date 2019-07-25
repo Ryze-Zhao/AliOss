@@ -66,4 +66,13 @@ public class AliossApplicationTests {
             System.out.println("\t" + s.getKey());
         }
     }
+    /**
+     * 删除单个文件（有批量删除的，参考阿里云API）
+     */
+    @Test
+    public void deleteObject() {
+        // 删除文件。
+        oss.deleteObject(bucket, "测试上传文件.txt");
+    }
+
 }
